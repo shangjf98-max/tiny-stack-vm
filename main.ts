@@ -35,18 +35,18 @@ case 7:{let a=S[s-3];S[s-3]=S[s-2];S[s-2]=S[s-1];S[s-1]=a;break;}
 case 23:S[s-1]=-S[s-1]|0;break;
 case 27:S[s-1]=~S[s-1];break;
 case 48:case 49:case 50:
-if(t==48||(t==49)===(S[--s]==0))pc=pc+((p[pc-2]|p[pc-1]<<8)<<16>>16);break;
+if(t==48||(t==49)===(S[--s]==0))pc+=((p[pc-2]|p[pc-1]<<8)<<16>>16);break;
 case 51:if(c==64)return R(7);T[c++]=pc;pc=p[pc-2]|p[pc-1]<<8;break;
 case 52:if(!c)return R(8);pc=T[--c];break;
 case 64:{let a=S[s-1];if(a<0||a>255)return R(6);S[s-1]=M[a];break;}
 case 65:{let a=S[s-1],b=S[s-2];if(a<0||a>255)return R(6);s-=2;M[a]=b;break;}
 case 80:{let b=F.encode(S[s-1]+"");if(l+b.length>65536)return R(11);s--;o.set(b,l);l+=b.length;break;}
-case 81:if(l+1>65536)return R(11);o[l++]=S[--s]&255;break;
+case 81:if(l>65535)return R(11);o[l++]=S[--s]&255;break;
 case 82:S[s++]=i<q.length?q[i++]:-1;break;
 case 83:return R(S[--s]&255);
 }}
 }
 const I=process.env.MAKEFUN_INPUT_DIR??"/input",O=process.env.MAKEFUN_OUTPUT_DIR??"/output";
-for(const d of B(I).sort()){
+for(const d of B(I)){
 let[x,y]=G(C(I+"/"+d+"/program.bin"),C(I+"/"+d+"/input.bin"));
 A(O+"/"+d,{recursive:true});D(O+"/"+d+"/stdout.bin",x);D(O+"/"+d+"/exit.txt",y+"\n");}
